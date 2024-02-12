@@ -12,4 +12,4 @@ else
     exit 1
 fi
 
-rofi -modi "theme-menu:/home/marq/.config/rofi/scripts/rofi-themes,backgrounds:/home/marq/.config/rofi/scripts/rofi-backgrounds" -show "$modi_option"
+rofi -config "$HOME/.config/rofi/theme_config.rasi" -show "$modi_option"

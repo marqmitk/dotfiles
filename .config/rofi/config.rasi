@@ -15,5 +15,5 @@ configuration{
     sidebar-mode: true;
 }
 
-@theme "current_theme"
+@theme "style-2"
 

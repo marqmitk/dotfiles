@@ -10,10 +10,10 @@ all=(latte frappé macchiato mocha)
 theme=$(jq -r '.current_theme' ~/.config/rofi/scripts/.custom_config.json)
 
 declare -A texts
-texts[latte]="Catppuccin Latte"
-texts[frappé]="Catppuccin Frappé"
-texts[macchiato]="Catppuccin Macchiato"
-texts[mocha]="Catppuccin Mocha"
+texts[latte]="Latte"
+texts[frappé]="Frappé"
+texts[macchiato]="Macchiato"
+texts[mocha]="Mocha"
 
 declare -A icons
 icons[latte]="❄️"
@@ -35,7 +35,7 @@ actions[mocha]="sudo $script mocha 1"
 for choice in "${all[@]}"; do
     echo -n "${icons[$choice]}  ${texts[$choice]}"
     if [ "$choice" == "$theme" ]; then
-        echo " (current)"
+        echo " 󰗠"
     else
         echo
     fi

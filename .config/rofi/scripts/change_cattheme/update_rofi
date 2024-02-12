@@ -2,7 +2,7 @@ coffee_type=$1
 rofi="/home/marq/.config/rofi/themes"
 debug=$2
 
-cp "$rofi/catppuccin-$coffee_type.rasi" "$rofi/current_theme.rasi"
+cp "$rofi/catppuccin-$coffee_type.rasi" "$rofi/current_palette.rasi"
 if [ "$debug" -eq "1" ]; then
     notify-send "Updated rofi theme to $coffee_type"
 fi

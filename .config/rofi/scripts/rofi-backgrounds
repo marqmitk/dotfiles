@@ -5,18 +5,30 @@ set -u
 # Print all the files in ~/Pictures/backgrounds
 path=~/Pictures/backgrounds
 current_background=$(jq -r '.current_background' ~/.config/rofi/scripts/.custom_config.json)
+current_background="${current_background%.*}"
+counter=1
 for file in "$path"/*; do
     name=$(basename "$file")
-    # skip the current background or the current_background.jpg
-    if [ "$name" == ".current_background.jpg" ] || [ "$file" == "$current_background" ]; then
+    name="${name%.*}"
+    if [ "$name" == ".current_background.jpg" ]; then
         continue
     fi
+
+    if [ "$name" == "$(basename "$current_background")" ]; then
+        echo -n "󰗠  "
+    fi
+    echo -n "$counter.) "
+
+
     echo "$name"
+
+    ((counter++))
 done
 
 
 if [ $# -gt 0 ]; then
     selection="$1"
+    selection="${selection#[0-9]*.) }"
     killall -q rofi
 else
     echo "No selection provided." >&2
@@ -25,7 +37,17 @@ fi
 
 
 # replace "current_background": "...." in json from ~/.config/rofi/scripts/.custom_config.json with the full path
-path="$path/$selection"
+if [ -f "$path/$selection.jpg" ]; then
+    path="$path/$selection.jpg"
+elif [ -f "$path/$selection.png" ]; then
+    path="$path/$selection.png"
+else
+    echo "Neither $path.jpg nor $path.png exists." >&2
+    exit 1
+fi
+
+
+
 sed -i "s|\"current_background\": \".*\"|\"current_background\": \"$path\"|" ~/.config/rofi/scripts/.custom_config.json
 
 # cp the selected background to ~/Pictures/backgrounds/current_background.jpg
