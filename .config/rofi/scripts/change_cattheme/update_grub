@@ -1,0 +1,12 @@
+coffee_type=$1
+grub="/usr/share/grub/themes"
+debug=$2
+
+
+yes | sudo rm -r "$grub/current_theme"
+sudo cp -r "$grub/catppuccin-$coffee_type-grub-theme" "$grub/current_theme"
+if [ "$debug" -eq "1" ]; then
+    notify-send "Updated GRUB theme to $coffee_type"
+fi
+
+grub-mkconfig -dm "sudo grub-mkconfig -o /boot/grub/grub.cfg"

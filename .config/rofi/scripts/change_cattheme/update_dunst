@@ -1,0 +1,9 @@
+dunst="/home/marq/.config/dunst/themes"
+coffee_type=$1
+debug=$2
+
+sudo cp "$dunst/$coffee_type.conf" "$dunst/../dunstrc"
+
+if [ "$debug" -eq "1" ]; then
+    notify-send "Updated dunst theme to $coffee_type"
+fi

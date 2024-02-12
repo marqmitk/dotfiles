@@ -1,0 +1,10 @@
+coffee_type=$1
+eww="/home/marq/.config/eww/themes"
+debug=$2
+
+
+sudo cp "$eww/$coffee_type.scss" "$eww/current_theme.scss"
+eww reload
+if [ "$debug" -eq "1" ]; then
+    notify-send "Updated eww theme to $coffee_type"
+fi

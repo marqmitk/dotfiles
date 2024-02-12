@@ -1,0 +1,10 @@
+# get a random line from ./splash.txt
+# get a new one if its longer as 24 characters or the same as the previous one
+# prev_splash is saved in prev_splash.txt
+prev_splash=$(cat ~/.config/eww/scripts/prev_splash.txt)
+splash=$(shuf -n 1 ~/.config/eww/scripts/splash.txt)
+while [ ${#splash} -gt 24 ] || [ "$splash" = "$prev_splash" ]; do
+  splash=$(shuf -n 1 ~/.config/eww/scripts/splash.txt)
+done
+echo $splash > ~/.config/eww/scripts/prev_splash.txt
+echo $splash

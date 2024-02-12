@@ -1,0 +1,15 @@
+coffee_type=$1
+waybar="/home/marq/.config/waybar/themes"
+debug=$2
+
+# if the type is frappé then set the waybar_coffee_type to frappe
+if [ "$coffee_type" == "frappe" ]; then
+    waybar_coffee_type="frappe"
+else
+    waybar_coffee_type="$coffee_type"
+fi
+
+sudo rm "$waybar/current_theme.css"
+sudo cp -r "$waybar/$coffee_type.css" "$waybar/current_theme.css"
+
+echo "Waybar theme set to $coffee_type"

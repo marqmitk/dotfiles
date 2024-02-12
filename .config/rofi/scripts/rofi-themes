@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+set -e
+set -u
+
+# All supported choices
+all=(latte frappé macchiato mocha)
+
+# Get the current theme from the config file
+theme=$(jq -r '.current_theme' ~/.config/rofi/scripts/.custom_config.json)
+
+declare -A texts
+texts[latte]="Catppuccin Latte"
+texts[frappé]="Catppuccin Frappé"
+texts[macchiato]="Catppuccin Macchiato"
+texts[mocha]="Catppuccin Mocha"
+
+declare -A icons
+icons[latte]="❄️"
+icons[frappé]="🍦"
+icons[macchiato]="☕"
+icons[mocha]="🍫"
+
+
+declare -A actions
+
+script="/home/marq/.config/rofi/scripts/change_cattheme.sh"
+
+actions[latte]="sudo $script latte 1"
+actions[frappé]="sudo $script frappé 1"
+actions[macchiato]="sudo $script macchiato 1"
+actions[mocha]="sudo $script mocha 1"
+
+# Print the available choices with names and icons for Rofi
+for choice in "${all[@]}"; do
+    echo -n "${icons[$choice]}  ${texts[$choice]}"
+    if [ "$choice" == "$theme" ]; then
+        echo " (current)"
+    else
+        echo
+    fi
+done
+
+
+# Get the selected choice from the arguments, convert to lower case, and take the last item
+if [ $# -gt 0 ]; then
+    selection="${1,,}"
+    selection="${selection##* }"
+    # if the selected choice is the same as the current theme, do nothing and echo the current theme
+else
+    echo "No selection provided." >&2
+    exit 1
+fi
+
+# Check if the selected choice is valid
+
+# Execute the selected action
+
+${actions[$selection]}
+
+# Restart dunst
+killall -q dunst || true
+screen -dmS dunst dunst
+
+# Save the selected choice to a file
+# set current_theme in json from ~/.config/rofi/scripts/.custom_config.json
+jq '.current_theme = "'$selection'"' ~/.config/rofi/scripts/.custom_config.json > ~/.config/rofi/scripts/.custom_config.json.tmp && mv ~/.config/rofi/scripts/.custom_config.json.tmp ~/.config/rofi/scripts/.custom_config.json
+name=${selection^}
+
+
+
+# Restart rofi
+killall -q rofi
+
+~/.config/hypr/scripts/rofi-themes 1
+
+
+

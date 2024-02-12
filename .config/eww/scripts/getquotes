@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Fetch a random quote from the Quotable API
+response=$(curl -s -k "https://api.quotable.io/random")
+
+if [ ! -d "/tmp/quotes" ]; then
+    mkdir -p /tmp/quotes
+fi
+
+# Check if response is successful
+if [[ $(echo "$response" | jq -r '.status') == "success" ]]; then
+    # Extract quote content and author using jq
+    quote=$(echo "$response" | jq -r '.content')
+    author=$(echo "$response" | jq -r '.author')
+
+    # Print the quote
+    echo "$quote - $author"
+
+else
+    echo "$response" | jq -r '.content' > /tmp/quotes/quote
+    echo "$response" | jq -r '.author' > /tmp/quotes/author
+fi

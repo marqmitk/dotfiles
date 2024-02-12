@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+set -e
+set -u
+# Print all the files in ~/Pictures/backgrounds
+path=~/Pictures/backgrounds
+current_background=$(jq -r '.current_background' ~/.config/rofi/scripts/.custom_config.json)
+for file in "$path"/*; do
+    name=$(basename "$file")
+    # skip the current background or the current_background.jpg
+    if [ "$name" == ".current_background.jpg" ] || [ "$file" == "$current_background" ]; then
+        continue
+    fi
+    echo "$name"
+done
+
+
+if [ $# -gt 0 ]; then
+    selection="$1"
+    killall -q rofi
+else
+    echo "No selection provided." >&2
+    exit 1
+fi
+
+
+# replace "current_background": "...." in json from ~/.config/rofi/scripts/.custom_config.json with the full path
+path="$path/$selection"
+sed -i "s|\"current_background\": \".*\"|\"current_background\": \"$path\"|" ~/.config/rofi/scripts/.custom_config.json
+
+# cp the selected background to ~/Pictures/backgrounds/current_background.jpg
+cp "$path" ~/Pictures/backgrounds/.current_background.jpg
+
+# set the background
+killall swaybg || true
+swaybg -i ~/Pictures/backgrounds/.current_background.jpg &
+eww reload
+
+# restart rofi
+~/.config/hypr/scripts/rofi-themes 2
+

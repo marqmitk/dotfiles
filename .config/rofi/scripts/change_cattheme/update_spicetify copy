@@ -1,0 +1,16 @@
+coffee_type=$1
+spicetify="/home/marq/.config/spicetify/Themes"
+debug=$2
+
+sudo runuser -l marq -c "spicetify config current_theme 'catppuccin' > /dev/null 2>&1"
+#if the type is frappé then set the spicetify_coffee_type to frappe
+if [ "$coffee_type" == "frappe" ]; then
+    spicetify_coffee_type="frappe"
+else
+    spicetify_coffee_type="$coffee_type"
+fi
+
+sudo runuser -l marq -c "spicetify config color_scheme '$spicetify_coffee_type' > /dev/null 2>&1"
+sudo runuser -l marq -c "spicetify apply > /dev/null 2>&1"
+
+echo "Spicetify theme set to $spicetify_coffee_type"

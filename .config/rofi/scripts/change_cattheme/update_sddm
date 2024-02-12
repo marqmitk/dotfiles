@@ -1,0 +1,10 @@
+coffee_type=$1
+sddm="/usr/share/sddm/themes"
+debug=$2
+
+
+yes | sudo rm -r "$sddm/current_theme"
+sudo cp -r "$sddm/catppuccin-$coffee_type" "$sddm/current_theme"
+if [ "$debug" -eq "1" ]; then
+    notify-send "Updated SDDM theme to $coffee_type"
+fi

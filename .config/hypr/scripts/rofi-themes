@@ -1,0 +1,15 @@
+#!/bin/bash
+
+tab=$1
+selected_tab=$2
+
+if [ "$tab" == "1" ]; then
+    modi_option="theme-menu"
+elif [ "$tab" == "2" ]; then
+    modi_option="backgrounds"
+else
+    echo "Invalid tab number. Please specify either 1 or 2."
+    exit 1
+fi
+
+rofi -modi "theme-menu:/home/marq/.config/rofi/scripts/rofi-themes,backgrounds:/home/marq/.config/rofi/scripts/rofi-backgrounds" -show "$modi_option"

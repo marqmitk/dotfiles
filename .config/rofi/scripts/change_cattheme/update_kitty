@@ -1,0 +1,10 @@
+coffee_type=$1
+kitty="/home/marq/.config/kitty/themes"
+debug=$2
+
+sudo runuser -l marq -c "kitty +kitten themes --reload-in=all Catppuccin Kitty $coffee_type"
+sudo cp "$kitty/$coffee_type.conf" "$kitty/../current_theme.conf"
+
+if [ "$debug" -eq "1" ]; then
+    notify-send "Updated kitty theme to $coffee_type"
+fi
