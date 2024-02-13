@@ -21,15 +21,6 @@
   font-size: 2rem;
 }
 
-#custom-updater {
-  background-color: @surface0;
-  color: @text;
-  padding: 0.5rem 1.5rem 0.5rem 1rem;
-  border-radius: 1rem;
-  margin: 5px;
-  font-size: 2rem;
-}
-
 #workspaces {
   border-radius: 1rem;
   margin: 5px;
@@ -128,4 +119,12 @@
 #tray {
   margin-right: 1rem;
   border-radius: 1rem;
+}
+
+#custom-updater {
+  background-color: @surface0;
+  color: @text;
+  border-radius: 1rem;
+  font-size: 2rem;
+  margin-left: 1rem;
 }

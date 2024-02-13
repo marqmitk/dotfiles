@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 coffee_type=$1
 rofi="/home/marq/.config/rofi/themes"
 debug=$2
