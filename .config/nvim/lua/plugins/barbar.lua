@@ -5,14 +5,21 @@ return {
       'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
       'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
     },
-    init = function() vim.g.barbar_auto_setup = false end,
     opts = {
       -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
       -- animation = true,
       -- insert_at_start = true,
       -- …etc.
     },
-    version = '^1.0.0', -- optional: only update when a new 1.x version is released
+    config = function()
+      vim.g.barbar_auto_setup = false
+      vim.keymap.set('n', '<leader>b1', '<cmd>BufferGoto 1<CR>') 
+      vim.keymap.set('n', '<leader>b2', '<cmd>BufferGoto 2<CR>')
+      vim.keymap.set('n', '<leader>b3', '<cmd>BufferGoto 3<CR>')
+      vim.keymap.set('n', '<leader>b4', '<cmd>BufferGoto 4<CR>')
+      vim.keymap.set('n', '<leader>bm', '<cmd>BufferNext<CR>')
+      vim.keymap.set('n', '<leader>bn', '<cmd>BufferPrevious<CR>')
+    end,
   }
 
 }

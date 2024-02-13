@@ -7,7 +7,7 @@ return {
       "MunifTanjim/nui.nvim",
   },
   config=function()
-    vim.keymap.set('n', '<C-n>', ':Neotree filesystem toggle<CR>', {})
+    vim.keymap.set('n', '<C-n>', ':Neotree filesystem float<CR>', {})
   end
 }
 
