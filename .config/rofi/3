@@ -1,0 +1,135 @@
+#!/usr/bin/env bash
+
+
+defaultPath=~/Pictures/backgrounds
+echo "${3:-0}" > /tmp/rofi2.log
+
+# argument is path
+setBackground ()
+{
+    echo "$path"
+    # get path using find -name "$selection.*[jpg|png]"
+    fullPath=$(find "$path/" -name "$selection.*" | head -n 1)
+    if [ -z "$fullPath" ]; then
+        echo "No file found with the name $selection" >&2
+        exit 1
+    else
+        path=$fullPath
+    fi
+
+    sed -i "s|\"current_background\": \".*\"|\"current_background\": \"$path\"|" ~/.config/rofi/scripts/.custom_config.json
+    cp "$path" ~/Pictures/backgrounds/.current_background.jpg
+    killall swaybg || true
+    swaybg -i ~/Pictures/backgrounds/.current_background.jpg &
+    eww reload || true
+
+    ~/.config/hypr/scripts/rofi-themes 2
+}
+
+printDirectory() {
+    path="$1/"
+    # if the current path is not the default path
+    if [ "$path" != "$defaultPath" ]; then
+        echo -n "  .."
+        echo
+    fi
+    for file in "$path"/*; do
+        name=$(basename "$file")
+        name="${name%.*}"
+        if [ "$name" == ".current_background.jpg" ]; then
+            continue
+        fi
+
+        # if its a directory print  Name
+
+        if [ -d "$file" ]; then
+            echo -n "  "
+            echo "$name"
+            continue
+        fi
+
+        if [ "$name" == "$(basename "$current_background")" ]; then
+            echo -n "󰗠  "
+        fi
+        echo -n "$counter.) "
+
+
+        echo "$name"
+
+        ((counter++))
+    done
+}
+
+set -u
+# Print all the files in ~/Pictures/backgrounds
+current_background=$(jq -r '.current_background' ~/.config/rofi/scripts/.custom_config.json)
+current_background="${current_background%.*}"
+counter=1
+
+path="${2:-$defaultPath}"
+# if
+if [ -n "${1:-}" ]; then
+    # if  is in the selection print hello world
+    selection="$1"
+    echo "selection: $selection" > /tmp/rofi.log
+    if [[ $selection == *""* ]]; then
+        selection="${selection#*  }"
+
+        if [ "$selection" == ".." ]; then
+            path=$(dirname "$path")
+        else
+            path="$path/$selection/"
+        fi
+        killall -q rofi
+        echo "Folder selected path: $path 1: $1 2: ${2:-}" > /tmp/rofi.log
+        ~/.config/hypr/scripts/rofi-themes 2 "$path" > /dev/null
+        exit 0
+
+    fi
+    echo "No folder selected path: $path 1: $1 2: ${2:-}" > /tmp/rofi.log
+
+fi
+
+
+
+if [ -n "${2:-}" ]; then
+    path="$2"
+fi
+
+# multiline comment
+: '
+    if [[ $selection == *""* ]]; then
+        selection="${selection#*  }"
+
+        # if the selection is .. go to the parent directory
+        if [ "$selection" == ".." ]; then
+            path=$(dirname "$path")
+            printDirectory
+            exit 0
+        fi
+
+        path="$path/$selection"
+        echo "path: $path"
+        killall -q rofi
+        ~/.config/hypr/scripts/rofi-themes 2 "$path"
+        exit 0
+        # set the first argument empty
+        shift 1
+    fi
+'
+
+
+printDirectory "$path"
+
+# if
+
+if [ -n "${1+}" ]; then # this line is the same as if [ -n "$1" ], it checks if the first argument is not empty
+    selection="$1"
+    selection="${selection#[0-9]*.) }"
+    killall -q rofi
+    setBackground
+else
+    echo "No selection provided." >&2
+    exit 2
+fi
+exit 0

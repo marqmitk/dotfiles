@@ -7,6 +7,9 @@ return {
       "MunifTanjim/nui.nvim",
   },
   config=function()
+    require('neo-tree').setup({
+      follow_current_file = true
+    })
     vim.keymap.set('n', '<C-n>', ':Neotree filesystem float<CR>', {})
   end
 }

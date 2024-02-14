@@ -1,15 +1,31 @@
 #!/bin/bash
 
 tab=$1
-selected_tab=$2
+
+backgrounds_folder="${2:-$HOME/Pictures/backgrounds}"
+
+# if the backgrounds folder is the default one, echo "default" to /temp/rofi-backgrounds
+
+if [ "$backgrounds_folder" == "$HOME/Pictures/backgrounds/Anime/" ]; then
+    echo "default" > /tmp/rofi-backgrounds
+else
+    echo "custom" > /tmp/rofi-backgrounds
+fi
 
 if [ "$tab" == "1" ]; then
     modi_option="theme-menu"
-elif [ "$tab" == "2" ]; then
+    echo "theme-menu"
+  elif [ "$tab" == "2" ]; then
     modi_option="backgrounds"
+    echo "backgrounds"
 else
     echo "Invalid tab number. Please specify either 1 or 2."
     exit 1
 fi
+#
 
-rofi -config "$HOME/.config/rofi/theme_config.rasi" -show "$modi_option"
+modi="drun,theme-menu:~/.config/rofi/scripts/rofi-themes,backgrounds:~/.config/rofi/scripts/rofi-backgrounds.sh '' $backgrounds_folder"
+
+echo "$backgrounds_folder"
+
+rofi -config "$HOME/.config/rofi/theme_config.rasi" -show $modi_option -modi "$modi"

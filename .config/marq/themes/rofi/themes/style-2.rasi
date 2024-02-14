@@ -11,7 +11,7 @@
 
 /*****----- Configuration -----*****/
 configuration {
-	modi: "drun,theme-menu:~/.config/rofi/scripts/rofi-themes,backgrounds:~/.config/rofi/scripts/rofi-backgrounds";
+	modi: "drun,theme-menu:~/.config/rofi/scripts/rofi-themes,backgrounds:~/.config/rofi/scripts/rofi-backgrounds.sh";
     show-icons:                 false;
     hover-select:               true;
     steal-focus:                true;

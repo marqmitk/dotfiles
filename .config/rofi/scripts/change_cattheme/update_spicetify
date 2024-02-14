@@ -1,5 +1,4 @@
 coffee_type=$1
-spicetify="/home/marq/.config/spicetify/Themes"
 debug=$2
 
 sudo runuser -l marq -c "spicetify config current_theme 'catppuccin' > /dev/null 2>&1"
