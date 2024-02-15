@@ -2,18 +2,15 @@
 
 
 defaultPath=~/Pictures/backgrounds
+favoritesPath="/home/marq/Pictures/backgrounds/Favorites/"
+
+# if there is a "Favorites" folder, but its empty, delete it
 
 # print the values of all the arguments seperated by a "|"
-
+echo "Arguments: $*" > /tmp/rofiar.log
 # save into a string and then int rofi2.log
 
-arguments="$*"
 
-echo "Arguments: $arguments" > /tmp/rofi2.log
-
-for arg in "$@"; do
-    echo "arg: $arg" >> /tmp/rofi2.log
-done
 setBackground ()
 {
     # if the selection ends with "sh" reutnr
@@ -35,7 +32,6 @@ setBackground ()
     killall swaybg || true
     swaybg -i ~/Pictures/backgrounds/.current_background.jpg &
     eww reload || true
-    echo "Path: $path" > /tmp/rofi10.log
     ~/.config/hypr/scripts/rofi-themes 2 "$folder" >> /dev/null
 }
 
@@ -44,7 +40,6 @@ printDirectory() {
     # if the current path is not the default path
     if [ "$path" != "$defaultPath/" ]; then
         echo "  .."
-        echo "$path - $defaultPath" >> /tmp/rofi3.log
     fi
     for file in "$path"/*; do
         name=$(basename "$file")
@@ -63,7 +58,7 @@ printDirectory() {
 
         if [ "$name" == "$(basename "$current_background")" ]; then
             echo -n "󰗠  "
-          else 
+        else
             echo -n "󰗡  "
         fi
         echo -n "$counter.) "
@@ -75,6 +70,71 @@ printDirectory() {
     done
 }
 
+printOptions() {
+    echo "  Go back"
+    # echo "  Favorite"
+    # if the background is in the favorites folder, print "  Unfavorite"
+    # # check for png or jpg (use the variable favoritesPath)
+    if [ -f "$favoritesPath/$selection.jpg" ] || [ -f "$favoritesPath/$selection.png" ]; then
+        echo "  Unfavorite"
+    else
+        echo "  Favorite"
+    fi
+    echo "  Set as background"
+    echo "󰋩  $selection"
+}
+
+setFavorite() {
+    echo "Setting $selection as favorite" > /tmp/rofi.log
+    # if there is no favorites folder create it (use the variable favoritesPath)
+    if [ ! -d "$favoritesPath" ]; then
+        echo "mkdir $favoritesPath" > /tmp/rofi.log
+        mkdir "$favoritesPath"
+    fi
+    echo "Successfully created $favoritesPath" >> /tmp/rofi.log
+    # check if you should append .jpg or .png
+    if [ -f "$path/$selection.jpg" ]; then
+        selection="$selection.jpg"
+    elif [ -f "$path/$selection.png" ]; then
+        selection="$selection.png"
+    else
+        echo "No file found with the name $selection" >&2
+        exit 1
+    fi
+    # create a symlink to the file in the favorites folder
+    ln -s "$path/$selection" "$favoritesPath/$selection"
+}
+
+unsetFavorite() {
+    echo "Unsetting $selection as favorite" > /tmp/rofi.log
+    # remove the symlink from the favorites folder
+    # check if you should append .jpg or .png
+    #
+
+    echo "Checking if $favoritesPath/$selection.png exists" > /tmp/rofi6.log
+    echo "Checking if $favoritesPath/$selection.jpg exists" >> /tmp/rofi6.log
+
+    if [ -f "$favoritesPath$selection.jpg" ]; then
+        echo "rm $favoritesPath$selection.jpg" > /tmp/rofi6.log
+        rm "$favoritesPath$selection.jpg"
+    elif [ -f "$favoritesPath$selection.png" ]; then
+        echo "rm $favoritesPath$selection.png" > /tmp/rofi6.log
+        rm "$favoritesPath$selection.png"
+    else
+        echo "No file found with the name $selection" >&2
+        exit 1
+    fi
+
+
+    echo "Found $selection" > /tmp/rofi2.log
+
+
+    # if the favorites folder is empty, delete it (use the variable favoritesPath)
+    if [ ! "$(ls -A $favoritesPath)" ]; then
+        echo "rm -r $favoritesPath" > /tmp/rofi.log
+        rm -r $favoritesPath
+    fi
+}
 set -u
 # Print all the files in ~/Pictures/backgrounds
 current_background=$(jq -r '.current_background' ~/.config/rofi/scripts/.custom_config.json)
@@ -86,45 +146,112 @@ path="${2:-$defaultPath}"
 # if
 if [ $# -gt 0 ]; then
     # selection is the last argument
-    selection="${@: -1}"
-    echo "selection: $selection" >> /tmp/rofi.log
+    for selection; do true; done
+    # pritn number of arguments
+    echo "Number of arguments: $#" > /tmp/rofi5.log
+    echo "Arguments: $*" >> /tmp/rofi5.log
     if [[ $selection == *""* ]]; then
+        echo "Selection is a directory" > /tmp/rofi.log
         selection="${selection#*  }"
-        echo "Started with : $selection" >> /tmp/rofi6.log
         if [ "$selection" == ".." ]; then
             path=$(dirname "$path")
         else
             path="$path/$selection/"
         fi
         killall -q rofi
-        echo "Folder selected path: $path 1: $1 2: ${2:-}" >> /tmp/rofi.log
-        echo "Path: $path" > /tmp/rofi.log
         ~/.config/hypr/scripts/rofi-themes 2 "$path" >> /dev/null
         exit 0
 
-    else
-
-        # if the selection has "󰗠" or "󰗡" then set the background
-
-        if [[ $selection == *"󰗠"* ]] || [[ $selection == *"󰗡"* ]]; then
-           
-            # remove the 󰗠 or 󰗡 from the selection
-            selection="${selection#*󰗠  }"
-            selection="${selection#*󰗡  }"
-            # remove the counter from the selection
-            selection="${selection#*.) }"
-            echo "Selection: $selection" >> /tmp/rofi7.log
-            killall -q rofi 
-            setBackground
-            exit 0
-        else 
-            echo "Selection: $selection" >> /tmp/rofi8.log
-            printDirectory "$path"
-            exit 0
+        # If an image got selected, open the options menu
+    elif [[ $selection == *"󰗠"* ]] || [[ $selection == *"󰗡"* ]]; then
+        echo "Image got selected $selection" > /tmp/rofi.log
+        # strip the first 5 characters
+        selection="${selection#*󰗠  }"
+        selection="${selection#*󰗡  }"
+        selection="${selection#[0-9]*.) }"
+        echo "Image got selected $selection" >> /tmp/rofi.log
+        killall -q rofi
+        ~/.config/hypr/scripts/rofi-themes 2 "$path" "'$selection'" >> /dev/null
+        exit 1
+        # if there are 3 arguments, the last one is the path
+    elif [[ $selection == *""* ]]; then
+        num_args=$#
+        selection_index=$((num_args-1))
+        selection="${!selection_index}"
+        selection="${selection#*  }"
+        selection="${selection#*󰋩  }"
+        echo "Setting $ as background" > /tmp/rofi.log
+        killall -q rofi
+        setBackground
+        exit 0
+        # if we want to set the background as favorite
+    elif [[ $selection == *""* ]]; then
+        num_args=$#
+        selection_index=$((num_args-1))
+        selection="${!selection_index}"
+        selection="${selection#*  }"
+        selection="${selection#*󰋩  }"
+        echo "Removing $selection favorite" > /tmp/rofi6.log
+        killall -q rofi
+        unsetFavorite
+        # if the favorites folder got deleted AND was the currnet path, go back to the default pat
+        if [ ! -d $favoritesPath ] && [ "$path" == "$favoritesPath" ]; then
+            path=$defaultPath
         fi
+
+        ~/.config/hypr/scripts/rofi-themes 2 "$path" >> /dev/null
+        exit 0
+    elif [[ $selection == *""* ]]; then
+        num_args=$#
+        selection_index=$((num_args-1))
+        selection="${!selection_index}"
+        selection="${selection#*  }"
+        selection="${selection#*󰋩  }"
+        echo "Setting $selection as favorite" > /tmp/rofi6.log
+        killall -q rofi
+        setFavorite
+        ~/.config/hypr/scripts/rofi-themes 2 "$path" >> /dev/null
+        exit 0
+        # if we selected the image icon
+    elif [[ $selection == *"󰋩"* ]]; then
+        echo "Selected image" > /tmp/rofi9.log
+        echo "Arguments: $*" >> /tmp/rofi9.log
+        num_args=$#
+        selection_index=$((num_args-1))
+        echo "Selection index: $selection_index" >> /tmp/rofi9.log
+        selection="${!selection_index}"
+        echo "Selection: $selection" >> /tmp/rofi9.log
+        selection="${selection#*󰋩  }"
+        # check if you should append .jpg or .png
+        if [ -f "$path/$selection.jpg" ]; then
+            selection="$selection.jpg"
+        elif [ -f "$path/$selection.png" ]; then
+            selection="$selection.png"
+        else
+            echo "No file found with the name $selection" >&2
+            exit 1
+        fi
+        killall -q rofi
+        mupdf - "$path$selection" > /tmp/rofi7.log 2>&1 &
+        ~/.config/hypr/scripts/rofi-themes 2 "$path" >> /dev/null
+        exit 0
+
+
+        
+    elif [ $# -eq 3 ]; then
+        echo "3 arguments" > /tmp/rofi.log
+        printOptions
+        echo "󰋩  $selection" > /tmp/rofi.log
+        exit 0
+        # if we want to set the background
+
+
+    else
+        printDirectory "$path"
+        exit 0
     fi
+
 else
     printDirectory "$path"
-    echo "No selection provided" > /tmp/rofi.log
     exit 1
 fi

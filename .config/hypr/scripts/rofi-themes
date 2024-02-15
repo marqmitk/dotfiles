@@ -4,6 +4,9 @@ tab=$1
 
 backgrounds_folder="${2:-$HOME/Pictures/backgrounds}"
 
+chosen_picture=${3:-""}
+echo "$chosen_picture" > /tmp/rofi2.log
+
 # if the backgrounds folder is the default one, echo "default" to /temp/rofi-backgrounds
 
 if [ "$backgrounds_folder" == "$HOME/Pictures/backgrounds/Anime/" ]; then
@@ -24,7 +27,7 @@ else
 fi
 #
 
-modi="drun,theme-menu:~/.config/rofi/scripts/rofi-themes,backgrounds:~/.config/rofi/scripts/rofi-backgrounds.sh '' $backgrounds_folder"
+modi="drun,theme-menu:~/.config/rofi/scripts/rofi-themes,backgrounds:~/.config/rofi/scripts/rofi-backgrounds.sh '' $backgrounds_folder $chosen_picture"
 
 echo "$backgrounds_folder"
 
