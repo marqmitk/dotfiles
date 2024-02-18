@@ -3,6 +3,8 @@ palette = "catppuccin_latte"
 
 "$schema" = 'https://starship.rs/config-schema.json'
 
+
+
 format = """
 [](sapphire)\
 $os\
@@ -27,6 +29,8 @@ $docker_context\
 $time\
 [ ](fg:overlay1)\
 $line_break$character"""
+
+add_newline = true
 
 [os]
 disabled = false

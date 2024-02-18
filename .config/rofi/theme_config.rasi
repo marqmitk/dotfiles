@@ -1,8 +1,0 @@
-@theme "style-2"
-
-configuration{
-  show-icons: false;
-  terminal: "kitty";
-  drun-display-format: "{name}";
-  display-theme-menu: "THEMES";
-}

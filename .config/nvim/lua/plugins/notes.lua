@@ -1,0 +1,4 @@
+return {
+
+  'gsuuon/note.nvim',
+}

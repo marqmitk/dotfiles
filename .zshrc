@@ -109,3 +109,4 @@ export PATH="$PATH:$HOME/bin/"
 
 
 eval "$(starship init zsh)"
+eval "$(zoxide init --cmd cd zsh)"

@@ -1,3 +1,4 @@
+@import "~/.config/rofi/themes/current_palette.rasi"
 /**
  *
  * Author : Aditya Shakya (adi1090x)
@@ -10,24 +11,15 @@
 /*****----- Configuration -----*****/
 configuration {
 	modi:                       "drun,run,filebrowser,window";
-    show-icons:                 false;
     display-drun:               "";
     display-run:                "";
     display-filebrowser:        "";
     display-window:             "";
+    display-theme-menu:         "󰏘 ";
+    display-backgrounds:        "󰋩 ";
+    display-style:              "󰔃 ";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
-}
-
-/*****----- Global Properties -----*****/
-* {
-    font:                        "JetBrains Mono Nerd Font 10";
-    background:                  #11092D;
-    background-alt:              #281657;
-    foreground:                  #FFFFFF;
-    selected:                    #DF5296;
-    active:                      #6E77FF;
-    urgent:                      #8E3596;
 }
 
 /*****----- Main Window -----*****/
@@ -43,9 +35,11 @@ window {
 
     /* properties for all widgets */
     enabled:                     true;
-    border-radius:               0px;
+    border-radius:               10px;
     cursor:                      "default";
     background-color:            @background;
+
+    font:                        "Iosevka Nerd Font Bold 15";
 }
 
 /*****----- Main Box -----*****/
@@ -71,7 +65,7 @@ inputbar {
     spacing:                     0px;
     padding:                     100px 40px;
     background-color:            transparent;
-    background-image:            url("~/.config/rofi/images/j.jpg", width);
+    background-image:            url("~/Pictures/backgrounds/.current_background.jpg", height);
     text-color:                  @foreground;
     orientation:                 horizontal;
     children:                    [ "textbox-prompt-colon", "entry" ];
@@ -84,7 +78,7 @@ textbox-prompt-colon {
     border:                      0px 2px 2px 2px;
     border-radius:               0px;
     border-color:                @selected;
-    background-color:            @background-alt;
+    background-color:            @background;
     text-color:                  inherit;
 }
 entry {
@@ -94,7 +88,7 @@ entry {
     border:                      2px 2px 0px 0px;
     border-radius:               0px;
     border-color:                @selected;
-    background-color:            @background-alt;
+    background-color:            @background;
     text-color:                  inherit;
     cursor:                      text;
     placeholder:                 "Search";
@@ -111,13 +105,13 @@ mode-switcher{
 button {
     padding:                     8px;
     border-radius:               0px;
-    background-color:            @background-alt;
+    background-color:            @background;
     text-color:                  inherit;
     cursor:                      pointer;
 }
 button selected {
     background-color:            @selected;
-    text-color:                  @foreground;
+    text-color:                  @background;
 }
 
 /*****----- Listview -----*****/
@@ -163,7 +157,7 @@ element normal.active {
 }
 element selected.normal {
     background-color:            @selected;
-    text-color:                  @foreground;
+    text-color:                  @background;
 }
 element selected.urgent {
     background-color:            @urgent;
@@ -194,7 +188,7 @@ message {
 textbox {
     padding:                     8px;
     border-radius:               0px;
-    background-color:            @background-alt;
+    background-color:            @background;
     text-color:                  @foreground;
     vertical-align:              0.5;
     horizontal-align:            0.0;

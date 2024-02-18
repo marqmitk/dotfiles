@@ -21,6 +21,7 @@ return {
         b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
         c = { "<cmd>Telescope git_commits<cr>", "Checkout Commit" },
         s = { "<cmd>Telescope git_stash<cr>", "Stash" },
+        
       },
       
       d = {

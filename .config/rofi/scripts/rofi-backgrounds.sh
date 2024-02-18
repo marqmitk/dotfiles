@@ -41,6 +41,17 @@ printDirectory() {
     if [ "$path" != "$defaultPath/" ]; then
         echo "  .."
     fi
+
+    files=$(ls -1 "$path" | wc -l)
+    
+    # if the current path is the default path
+    if [ -d "$favoritesPath" ]; then
+        # if the current path is the base path, print "  Favorites"
+        if [ "$path" == "$defaultPath/" ]; then
+            echo "  Favorites"
+        fi
+    fi
+
     for file in "$path"/*; do
         name=$(basename "$file")
         name="${name%.*}"
@@ -49,8 +60,11 @@ printDirectory() {
         fi
 
         # if its a directory print  Name
-
         if [ -d "$file" ]; then
+            # if its "Favorites" skip
+            if [ "$name" == "Favorites" ]; then
+                continue
+            fi
             echo -n "  "
             echo "$name"
             continue
@@ -171,7 +185,7 @@ if [ $# -gt 0 ]; then
         selection="${selection#[0-9]*.) }"
         echo "Image got selected $selection" >> /tmp/rofi.log
         killall -q rofi
-        ~/.config/hypr/scripts/rofi-themes 2 "$path" "'$selection'" >> /dev/null
+        ~/.config/hypr/scripts/rofi-themes 2 "$path" "\"$selection\"" >> /dev/null
         exit 1
         # if there are 3 arguments, the last one is the path
     elif [[ $selection == *""* ]]; then
@@ -180,7 +194,7 @@ if [ $# -gt 0 ]; then
         selection="${!selection_index}"
         selection="${selection#*  }"
         selection="${selection#*󰋩  }"
-        echo "Setting $ as background" > /tmp/rofi.log
+        echo "Setting $selection as background" > /tmp/rofi.log
         killall -q rofi
         setBackground
         exit 0
@@ -232,7 +246,8 @@ if [ $# -gt 0 ]; then
             exit 1
         fi
         killall -q rofi
-        mupdf - "$path$selection" > /tmp/rofi7.log 2>&1 &
+        echo "Setting $path$selection as background" > /tmp/rofi10.log
+        mupdf "$path$selection" > /tmp/rofi7.log 2>&1 &
         ~/.config/hypr/scripts/rofi-themes 2 "$path" >> /dev/null
         exit 0
 

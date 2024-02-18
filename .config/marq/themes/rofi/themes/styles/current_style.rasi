@@ -1,5 +1,4 @@
-@import "current_palette.rasi"
-
+@import "~/.config/rofi/themes/current_palette.rasi"
 /**
  *
  * Author : Aditya Shakya (adi1090x)
@@ -11,14 +10,15 @@
 
 /*****----- Configuration -----*****/
 configuration {
-	modi: "drun,theme-menu:~/.config/rofi/scripts/rofi-themes,backgrounds:~/.config/rofi/scripts/rofi-backgrounds.sh";
-    show-icons:                 false;
+	modi: "drun";
+  // :show-icons:                 true;
     hover-select:               true;
     steal-focus:                true;
     display-drun:               "APPS";
     display-run:                "RUN";
     display-theme-menu:         "THEMES";
     display-backgrounds:        "BACKGROUNDS";
+    display-style:             "STYLES";
 	drun-display-format:        "{name}";
 	window-format:              "Class : {c}\nWorkspace : {w}";
     terminal:                   "kitty";
@@ -27,7 +27,7 @@ configuration {
 
 /*****----- Global Properties -----*****/
 * {
-    background-color: @bg-col;
+    background-color: @background;
     font:                        "Iosevka Nerd Font Bold 15";
 }
 
@@ -78,7 +78,7 @@ inputbar {
 entry {
     enabled:                     true;
     background-color:            transparent;
-    text-color:                  @fg-col;
+    text-color:                  @foreground;
     cursor:                      text;
     placeholder:                 "Type to filter";
     placeholder-color:           inherit;
@@ -118,21 +118,21 @@ element {
     border-radius:               8px;
     border-color:                gray/30%;
     background-color:            @bg-col-trans;
-    text-color:                  @fg-col2;
+    text-color:                  @foreground;
     cursor:                      pointer;
 }
 
 element normal.active {
-    background-color:            @blue;
-    text-color:                  @fg-col;
+    background-color:            @urgent;
+    text-color:                  @foreground;
 }
 element selected.normal {
-    background-color:            @bg-col;
-    text-color:                  @fg-col;
+    background-color:            @selected;
+    text-color:                  @background;
 }
 element selected.active {
-    background-color:            @fg-col2;
-    text-color:                  @fg-col;
+    background-color:            @selected;
+    text-color:                  @foreground;
 }
 element-icon {
     background-color:            transparent;
@@ -154,7 +154,7 @@ mode-switcher{
     spacing:                     20px;
     margin:                      0px 10%;
     background-color:            transparent;
-    text-color:                  @fg-col;
+   text-color:                  @foreground;
 }
 button {
     font:                        "Iosevka Nerd Font Bold 15";
@@ -166,8 +166,8 @@ button {
     cursor:                      pointer;
 }
 button selected {
-    background-color:            @bg-col;
-    text-color:                  inherit;
+    background-color:            @selected;
+    text-color:                  @background;
 }
 
 /*****----- Message -----*****/

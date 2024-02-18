@@ -7,13 +7,10 @@ backgrounds_folder="${2:-$HOME/Pictures/backgrounds}"
 chosen_picture=${3:-""}
 echo "$chosen_picture" > /tmp/rofi2.log
 
-# if the backgrounds folder is the default one, echo "default" to /temp/rofi-backgrounds
+# if the backgrounds folder is not the default one add $HOME/Pictures/backgrounds to the beginning of it
 
-if [ "$backgrounds_folder" == "$HOME/Pictures/backgrounds/Anime/" ]; then
-    echo "default" > /tmp/rofi-backgrounds
-else
-    echo "custom" > /tmp/rofi-backgrounds
-fi
+
+
 
 if [ "$tab" == "1" ]; then
     modi_option="theme-menu"
@@ -21,14 +18,20 @@ if [ "$tab" == "1" ]; then
   elif [ "$tab" == "2" ]; then
     modi_option="backgrounds"
     echo "backgrounds"
-else
+  elif [ "$tab" == "3" ]; then
+    modi_option="style"
+    echo "style"
+  else
     echo "Invalid tab number. Please specify either 1 or 2."
     exit 1
 fi
 #
 
-modi="drun,theme-menu:~/.config/rofi/scripts/rofi-themes,backgrounds:~/.config/rofi/scripts/rofi-backgrounds.sh '' $backgrounds_folder $chosen_picture"
+modi="'theme-menu:~/.config/rofi/scripts/rofi-themes,backgrounds:~/.config/rofi/scripts/rofi-backgrounds.sh \"\" $backgrounds_folder $chosen_picture',style:~/.config/rofi/scripts/rofi-style.sh"
 
-echo "$backgrounds_folder"
 
-rofi -config "$HOME/.config/rofi/theme_config.rasi" -show $modi_option -modi "$modi"
+echo "$modi" 
+
+
+~/.config/rofi/launcher.sh -show $modi_option -modi "$modi"
+exit 0
