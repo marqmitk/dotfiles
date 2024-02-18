@@ -16,4 +16,5 @@ return {
 		vim.keymap.set("n", "<C-n>", ":Neotree filesystem float<CR>", {})
     vim.keymap.set("n", "<leader>ob", ":Neotree buffers float<CR>", {})
     vim.keymap.set("n", "<leader>og", ":Neotree git_status float<CR>", {})
+    vim.keymap.set("n", "<leader>on", ":Neotree filesystem float<CR>", {})
 	end,}
