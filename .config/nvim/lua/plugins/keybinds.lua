@@ -47,7 +47,17 @@ return {
         name = "+Code",
         a = { "Code Action" },
       },
-  }
+
+      o = {
+        name = "+Open",
+        o = { "Outline" },
+      },
+      s = {
+        name = "+Split",
+        v = { "Vertical Split" },
+        s = { "Horizontal Split" },
+      }
+    }
 
     wk.register(mappings, { prefix = "<leader>" })
   end
