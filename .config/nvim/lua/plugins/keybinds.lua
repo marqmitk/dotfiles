@@ -8,11 +8,14 @@ return {
     local wk = require("which-key")
 
     mappings = {
+      ["<leader>"] = {
       f = {
         name = "+Find",
         f = { "Find File" },
         r = { "Open Recent File" },
         g = { "Grep" },
+        b = { "Buffers" },
+        d = { "Jump to Definition" },
       },
 
       g = {
@@ -51,14 +54,16 @@ return {
       o = {
         name = "+Open",
         o = { "Outline" },
+        u = { "Undo Tree" },
       },
       s = {
         name = "+Split",
         v = { "Vertical Split" },
         s = { "Horizontal Split" },
       }
+    },
     }
 
-    wk.register(mappings, { prefix = "<leader>" })
+    wk.register(mappings, {})
   end
  }

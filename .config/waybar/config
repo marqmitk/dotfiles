@@ -13,13 +13,9 @@
         "custom/updater"
     ],
     "modules-right": [
-        "pulseaudio",
-        "backlight",
-        "battery",
-        "clock",
         "tray",
-        "custom/lock",
-        "custom/power"
+        "pulseaudio",
+        "clock",
     ],
     "hyprland/workspaces": {
         "format": " {} {icon}",
@@ -38,7 +34,7 @@
         "on-click": "rofi -show drun"
     },
 	"custom/updater": {
-		"format": " {}",
+		"format": "  {}",
 		"exec": "checkupdates | wc -l",
 		"exec-if": "[[ $(checkupdates | wc -l) -gt 0 ]]",
 		"interval": 15,

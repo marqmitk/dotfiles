@@ -1,8 +1,9 @@
 @import "./themes/current_theme.css";
 
 * {
-  font-family: Iosevka;
+  font-family: Iosevka Bold;
   font-size: 17px;
+  font-weight: 600;
   min-height: 0;
 }
 
@@ -58,12 +59,14 @@
   background-color: @surface0;
   padding: 0.5rem 1rem;
   margin: 5px 0;
+  font-size: 1.5rem;
 }
 
 #clock {
   color: @blue;
   border-radius: 0px 1rem 1rem 0px;
   margin-right: 1rem;
+  font-size: 2rem;
 }
 
 #battery {
