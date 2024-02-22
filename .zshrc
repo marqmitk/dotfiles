@@ -96,6 +96,8 @@ alias cat="bat"
 alias discord="discord --enable-features=UseOzonePlatform --ozone-platform=wayland"
 alias spotify="spotify --enable-features=UseOzonePlatform --ozone-platform=wayland"
 alias chrome="google-chrome-stable --enable-features=UseOzonePlatform --ozone-platform=wayland"
+alias neofetch="neowofetch"
+alias cls="clear"
 #-------VARIABLES-------
 export notes="/home/marco/Documents/notes"
 export EDITOR='nvim'

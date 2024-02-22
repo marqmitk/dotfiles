@@ -2,14 +2,26 @@ return {
   {
     "williamboman/mason.nvim",
     config = function()
-      require("mason").setup()
+      require("mason").setup({
+        ensure_installed = {
+          "codelldb",
+      },
+      })
     end,
   },
+  {
+    'jay-babu/mason-nvim-dap.nvim',
+    event="VeryLazy",
+    depends = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+    opts = {
+        handlers = {}
+    }
+    },
   {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "tsserver", "powershell_es"},
+        ensure_installed = { "lua_ls", "tsserver", "powershell_es" },
       })
     end,
   },
