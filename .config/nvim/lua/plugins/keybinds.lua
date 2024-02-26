@@ -16,6 +16,7 @@ return {
           g = { "Grep" },
           b = { "Buffers" },
           d = { "Jump to Definition" },
+          u = { "Find References" },
         },
 
         g = {
