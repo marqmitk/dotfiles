@@ -49,6 +49,7 @@ return {
         c = {
           name = "+Code",
           a = { "Code Action" },
+          r = { "Rename symbol" },
         },
 
         o = {
