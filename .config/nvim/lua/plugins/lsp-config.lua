@@ -42,6 +42,7 @@ return {
           "clangd",
           "asm_lsp",
           "denols",
+          "slint_lsp",
         },
       })
     end,
@@ -57,8 +58,12 @@ return {
       lspconfig.texlab.setup({})
       lspconfig.clangd.setup({})
       lspconfig.asm_lsp.setup({})
+      lspconfig.denols.setup({})
+      lspconfig.slint_lsp.setup({})
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>fd", vim.lsp.buf.definition, {})
+      vim.keymap.set("n", "<leader>fD", vim.lsp.buf.declaration, {})
+      vim.keymap.set("n", "<leader>fi", vim.lsp.buf.implementation, {})
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
       vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, {})
     end,

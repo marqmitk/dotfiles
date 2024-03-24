@@ -7,7 +7,7 @@ return {
 
     local wk = require("which-key")
 
-    mappings = {
+    local mappings = {
       ["<leader>"] = {
         f = {
           name = "+Find",
@@ -16,7 +16,11 @@ return {
           g = { "Grep" },
           b = { "Buffers" },
           d = { "Jump to Definition" },
+          D = { "Jump to Declaration" },
+          i = { "Jump to Implementation" },
           u = { "Find References" },
+          e = { "Jump to Symbol" },
+          t = { "Find TODOs" },
         },
 
         g = {

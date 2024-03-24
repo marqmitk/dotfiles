@@ -5,9 +5,10 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "sharkdp/fd" },
 		config = function()
 			local builtin = require("telescope.builtin")
+
 			local telescope = require("telescope")
+
 			telescope.setup({
-				defaults = vim.tbl_extend("force", require("telescope.themes").get_dropdown(), {}),
 			})
 
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
@@ -15,8 +16,9 @@ return {
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 			vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
 			vim.keymap.set("n", "<leader>fn", "<cmd>:Telescope notify<cr>", {})
-      vim.keymap.set("n", "<leader>fu", "<cmd>:Telescope lsp_references<cr>", {})
-
+			vim.keymap.set("n", "<leader>fu", "<cmd>:Telescope lsp_references<cr>", {})
+			vim.keymap.set("n", "<leader>fe", "<cmd>:Telescope lsp_document_symbols<cr>", {})
+      vim.keymap.set("n", "<leader>ft", "<cmd>:TodoTelescope keywords=TODO,FIX,HACK<cr>", {})
 			--Telescope extensions
 			require("telescope").load_extension("harpoon")
 		end,
