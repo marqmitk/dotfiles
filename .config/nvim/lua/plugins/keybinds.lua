@@ -63,9 +63,11 @@ return {
           u = { "Undo Tree" },
         },
         s = {
-          name = "+Split",
+          name = "+Split n search",
           v = { "Vertical Split" },
           s = { "Horizontal Split" },
+          w = { "Toggle Spectre" },
+
         },
         h = {
           name = "+Harpoon",
