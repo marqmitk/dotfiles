@@ -20,6 +20,7 @@ return {
       vim.keymap.set('n', '<leader>bm', '<cmd>BufferNext<CR>')
       vim.keymap.set('n', '<leader>bn', '<cmd>BufferPrevious<CR>')
       vim.keymap.set('n', '<leader>bd', '<cmd>BufferClose<CR>')
+      vim.keymap.set('n', '<leader>bb', '<cmd>enew<CR>')
     end,
   }
 
