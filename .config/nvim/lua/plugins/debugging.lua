@@ -1,4 +1,5 @@
 return {
+  {
 	"mfussenegger/nvim-dap",
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
@@ -86,4 +87,8 @@ return {
 		end
 		dapui.setup()
 	end,
+},
+{
+  'nvim-neotest/nvim-nio',
+}
 }
