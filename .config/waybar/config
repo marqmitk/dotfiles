@@ -16,7 +16,6 @@
         "custom/updater"
     ],
     "modules-right": [
-        "tray",
         "pulseaudio",
         "clock",
     ],
@@ -34,8 +33,8 @@
     "custom/menu": {
         "format": "󰣇",
         "tooltip": false,
-        "on-click": "rofi -show drun"
-    },
+        "on-click": "/home/marq/.config/rofi/launcher.sh -show-icons -show drun"
+        },
 	"custom/updater": {
 		"format": "  {}",
 		"exec": "checkupdates | wc -l",

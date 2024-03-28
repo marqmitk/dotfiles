@@ -5,6 +5,7 @@
   font-size: 17px;
   font-weight: 600;
   min-height: 0;
+  opacity: 0.975;
 }
 
 #waybar {

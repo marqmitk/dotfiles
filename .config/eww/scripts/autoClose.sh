@@ -7,7 +7,7 @@ lastState=0
 # Function to perform actions when no window is open
 noWindowOpenAction () {
   if [ "$lastState" -ne 0 ]; then
-    eww open-many weather profile quote search_full disturb-icon home_dir reboot_full lock_full logout_full suspend_full player time_full
+    eww open-many weather calendar clock
     lastState=0
   fi
 }

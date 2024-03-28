@@ -15,8 +15,5 @@ theme='current_style'
 additional_arguments="$*"
 echo "Arguments: $additional_arguments" > /tmp/rofi-sh.log
 ## Run
-echo $additional_arguments > /tmp/rofi-sh.log
 command="rofi -theme ${dir}/${theme}.rasi ${additional_arguments}"
-echo $command > /tmp/rofi-sh.log
 eval $command
-

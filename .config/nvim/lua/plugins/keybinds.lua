@@ -21,6 +21,7 @@ return {
           u = { "Find References" },
           e = { "Jump to Symbol" },
           t = { "Find TODOs" },
+          m = { "Bookmarks" },
         },
 
         g = {

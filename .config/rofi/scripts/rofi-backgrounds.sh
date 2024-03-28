@@ -29,8 +29,7 @@ setBackground ()
 
     sed -i "s|\"current_background\": \".*\"|\"current_background\": \"$path\"|" ~/.config/rofi/scripts/.custom_config.json
     cp "$path" ~/Pictures/backgrounds/.current_background.jpg
-    killall swaybg || true
-    swaybg -i ~/Pictures/backgrounds/.current_background.jpg &
+    swww img ~/Pictures/backgrounds/.current_background.jpg --transition-type any
     eww reload || true
     ~/.config/hypr/scripts/rofi-themes 2 "$folder" >> /dev/null
 }

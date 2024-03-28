@@ -109,7 +109,5 @@ export PATH="$PATH:$HOME/bin/"
 #-------FUNCTIONS-------
 #AND THAT'S ALL
 
-echo ""
-eval "pokeshell -s bulbasaur squirtle charmander"
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"

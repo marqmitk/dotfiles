@@ -19,8 +19,10 @@ return {
 			vim.keymap.set("n", "<leader>fu", "<cmd>:Telescope lsp_references<cr>", {})
 			vim.keymap.set("n", "<leader>fe", "<cmd>:Telescope lsp_document_symbols<cr>", {})
       vim.keymap.set("n", "<leader>ft", "<cmd>:TodoTelescope keywords=TODO,FIX,HACK<cr>", {})
+      vim.keymap.set("n", "<leader>fm", "<cmd>:Telescope vim_bookmarks all<cr>", {})
 			--Telescope extensions
 			require("telescope").load_extension("harpoon")
+      require("telescope").load_extension("vim_bookmarks")
 		end,
 	},
 	{
