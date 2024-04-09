@@ -21,3 +21,10 @@ vim.api.nvim_set_keymap("i", "ÄÄ", "]", { noremap = true })
 vim.api.nvim_set_keymap("v", "<leader>y", ":w !wl-copy<CR><CR>", { noremap = true })
 vim.opt_local.spell = true
 vim.opt_local.spelllang = "en"
+
+if vim.g.neovide then
+  vim.o.guifont = "JetBrainsMono Nerd Font:h20"
+  vim.g.neovide_transparency = 0.9
+  vim.g.neovide_theme = 'auto'
+  vim.g.neovide_cursor_vfx_mode = "pixiedust"
+end
