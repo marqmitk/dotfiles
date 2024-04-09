@@ -19,3 +19,5 @@ vim.api.nvim_set_keymap("i", "ÖÖ", "}", { noremap = true })
 vim.api.nvim_set_keymap("i", "ää", "[", { noremap = true })
 vim.api.nvim_set_keymap("i", "ÄÄ", "]", { noremap = true })
 vim.api.nvim_set_keymap("v", "<leader>y", ":w !wl-copy<CR><CR>", { noremap = true })
+vim.opt_local.spell = true
+vim.opt_local.spelllang = "en"

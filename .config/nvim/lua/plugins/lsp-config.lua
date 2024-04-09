@@ -43,6 +43,7 @@ return {
           "asm_lsp",
           "denols",
           "slint_lsp",
+          "jdtls",
         },
       })
     end,
@@ -60,6 +61,7 @@ return {
       lspconfig.asm_lsp.setup({})
       lspconfig.denols.setup({})
       lspconfig.slint_lsp.setup({})
+      lspconfig.jdtls.setup({})
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>fd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>fD", vim.lsp.buf.declaration, {})
