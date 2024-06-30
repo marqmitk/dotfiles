@@ -111,3 +111,5 @@ export PATH="$PATH:$HOME/bin/"
 
 eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+
+export PATH=$PATH:/home/marq/.spicetify
