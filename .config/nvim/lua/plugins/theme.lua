@@ -29,12 +29,28 @@ local ayu = {
   config = function()
     local ayu = require('ayu')
     ayu.setup({
+      vim.cmd('colorscheme ayu')
     })
-    vim.cmd('colorscheme ayu-mirage')
   end
 
 }
 
+local modus = {
+  'ishan9299/modus-theme-vim',
+  config = function()
+    vim.g.modus_style = 'faint'
+    vim.cmd('colorscheme modus-vivendi')
+  end
+}
+
+local onedark = {
+  'navarasu/onedark.nvim',
+  config = function()
+    vim.g.onedark_style = 'darker'
+    vim.cmd('colorscheme onedark')
+  end
+}
+
 return {
-  ayu,
+  onedark,
 }

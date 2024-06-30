@@ -50,4 +50,7 @@ return {
 			require("telescope").load_extension("file_browser")
 		end,
 	},
+  {
+    "airblade/vim-rooter"
+  }
 }
