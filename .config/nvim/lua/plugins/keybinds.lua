@@ -30,6 +30,7 @@ return {
 					name = "+Git",
 					g = { "<cmd>Git<cr>", "Git Status" },
           h = { "<cmd>Git commit<cr>", "Git Commit" },
+          p = { "<cmd>Git push<cr>", "Git Push" },
 					b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
 					c = { "<cmd>Telescope git_commits<cr>", "Checkout Commit" },
           s = { "<cmd>Telescope git_stash<cr>", "List Stashes" },
