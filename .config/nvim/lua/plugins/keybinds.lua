@@ -28,10 +28,12 @@ return {
 
 				g = {
 					name = "+Git",
-					g = { "<cmd>Telescope git_status<cr>", "Git Status" },
+					g = { "<cmd>Git<cr>", "Git Status" },
+          h = { "<cmd>Git commit<cr>", "Git Commit" },
 					b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
 					c = { "<cmd>Telescope git_commits<cr>", "Checkout Commit" },
-					s = { "<cmd>Telescope git_stash<cr>", "Stash" },
+          s = { "<cmd>Telescope git_stash<cr>", "List Stashes" },
+          t = { "<cmd>Git stash<cr>", "Stash" },
 					f = { "<cmd>Flog<cr>", "Flog" },
 				},
 
