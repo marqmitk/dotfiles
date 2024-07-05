@@ -5,12 +5,9 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "sharkdp/fd" },
 		config = function()
 			local builtin = require("telescope.builtin")
-
 			local telescope = require("telescope")
 
-			telescope.setup({
-			})
-
+			telescope.setup({})
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
@@ -18,11 +15,9 @@ return {
 			vim.keymap.set("n", "<leader>fn", "<cmd>:Telescope notify<cr>", {})
 			vim.keymap.set("n", "<leader>fu", "<cmd>:Telescope lsp_references<cr>", {})
 			vim.keymap.set("n", "<leader>fe", "<cmd>:Telescope lsp_document_symbols<cr>", {})
-      vim.keymap.set("n", "<leader>ft", "<cmd>:TodoTelescope keywords=TODO,FIX,HACK<cr>", {})
-      vim.keymap.set("n", "<leader>fm", "<cmd>:Telescope vim_bookmarks all<cr>", {})
+			vim.keymap.set("n", "<leader>ft", "<cmd>:TodoTelescope keywords=TODO,FIX,HACK<cr>", {})
 			--Telescope extensions
 			require("telescope").load_extension("harpoon")
-      require("telescope").load_extension("vim_bookmarks")
 		end,
 	},
 	{
@@ -45,12 +40,13 @@ return {
 		end,
 	},
 	{
-		"nvim-telescope/telescope-file-browser.nvim",
-		config = function()
-			require("telescope").load_extension("file_browser")
-		end,
+		"airblade/vim-rooter",
+    config = function()
+      vim.g.rooter_silent_chdir = 1
+      vim.g.rooter_patterns = { ".git", ".git/", ".gitignore", ".gitmodules", ".hg", ".hg/", ".hgignore", ".bzr", ".bzr/", ".bzrignore", ".svn", ".svn/", ".svnignore", ".project", ".project/", ".projectignore", ".idea", ".idea/", ".ideignore" }
+    vim.g.rooter_manual_only = 1
+    vim.keymap.set("n", "<leader>cd", "<cmd>:Rooter<cr>", {})
+    end
 	},
-  {
-    "airblade/vim-rooter"
-  }
+
 }

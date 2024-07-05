@@ -2,15 +2,10 @@ return {
 
 {'romgrk/barbar.nvim',
     dependencies = {
-      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+      'lewis6991/gitsigns.nvim',
+      'nvim-tree/nvim-web-devicons',
     },
-    opts = {
-      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
-      -- animation = true,
-      -- insert_at_start = true,
-      -- …etc.
-    },
+    opts = {},
     config = function()
       vim.g.barbar_auto_setup = false
       vim.keymap.set('n', '<leader>b1', '<cmd>BufferGoto 1<CR>')
@@ -23,5 +18,4 @@ return {
       vim.keymap.set('n', '<leader>bb', '<cmd>enew<CR>')
     end,
   }
-
 }
