@@ -35,7 +35,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
-          "tsserver",
+          "ts_ls",
           "powershell_es",
           "bashls",
           "texlab",
@@ -53,7 +53,7 @@ return {
     config = function()
       local lspconfig = require("lspconfig")
       lspconfig.lua_ls.setup({})
-      lspconfig.tsserver.setup({})
+      lspconfig.ts_ls.setup({})
       lspconfig.powershell_es.setup({})
       lspconfig.bashls.setup({})
       lspconfig.texlab.setup({})
