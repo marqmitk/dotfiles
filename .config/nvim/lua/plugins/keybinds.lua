@@ -1,90 +1,66 @@
 return {
-	"folke/which-key.nvim",
-	event = "VeryLazy",
-	config = function()
-		vim.o.timeout = true
-		vim.o.timeoutlen = 200
-		local wk = require("which-key")
-		local mappings = {
-			["<leader>"] = {
-				n = {
-					name = "+Note",
-					n = { "New Note" },
-				},
-				f = {
-					name = "+Find",
-					f = { "Find File" },
-					r = { "Open Recent File" },
-					g = { "Grep" },
-					b = { "Buffers" },
-					d = { "Jump to Definition" },
-					D = { "Jump to Declaration" },
-					i = { "Jump to Implementation" },
-					u = { "Find References" },
-					e = { "Jump to Symbol" },
-					t = { "Find TODOs" },
-					m = { "Bookmarks" },
-				},
+  "folke/which-key.nvim",
+  event = "VeryLazy",
+  config = function()
+    vim.o.timeout = true
+    vim.o.timeoutlen = 200
+    local wk = require("which-key")
+    local mappings = {
+      { "<leader>b",  group = "Bar" },
+      { "<leader>b1", desc = "Jump to Tab 1" },
+      { "<leader>b2", desc = "Jump to Tab 2" },
+      { "<leader>b3", desc = "Jump to Tab 3" },
+      { "<leader>b4", desc = "Jump to Tab 4" },
+      { "<leader>bm", desc = "Next Tab" },
+      { "<leader>bn", desc = "Previous Tab" },
+      { "<leader>c",  group = "Code" },
+      { "<leader>ca", desc = "Code Action" },
+      { "<leader>cd", desc = "Root Directory" },
+      { "<leader>cr", desc = "Rename symbol" },
+      { "<leader>d",  group = "Debug" },
+      { "<leader>dc", desc = "Continue" },
+      { "<leader>di", desc = "Step Into" },
+      { "<leader>do", desc = "Step Over" },
+      { "<leader>ds", desc = "Step Out" },
+      { "<leader>dt", desc = "Toggle Breakpoint" },
+      { "<leader>f",  group = "Find" },
+      { "<leader>fD", desc = "Jump to Declaration" },
+      { "<leader>fb", desc = "Buffers" },
+      { "<leader>fd", desc = "Jump to Definition" },
+      { "<leader>fe", desc = "Jump to Symbol" },
+      { "<leader>ff", desc = "Find File" },
+      { "<leader>fg", desc = "Grep" },
+      { "<leader>fi", desc = "Jump to Implementation" },
+      { "<leader>fm", desc = "Bookmarks" },
+      { "<leader>fr", desc = "Open Recent File" },
+      { "<leader>ft", desc = "Find TODOs" },
+      { "<leader>fu", desc = "Find References" },
+      { "<leader>g",  group = "Git" },
+      { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout Branch" },
+      { "<leader>gc", "<cmd>Telescope git_commits<cr>",  desc = "Checkout Commit" },
+      { "<leader>gf", "<cmd>Flog<cr>",                   desc = "Flog" },
+      { "<leader>gg", "<cmd>Git<cr>",                    desc = "Git Status" },
+      { "<leader>gh", "<cmd>Git commit<cr>",             desc = "Git Commit" },
+      { "<leader>gp", "<cmd>Git push<cr>",               desc = "Git Push" },
+      { "<leader>gs", "<cmd>Telescope git_stash<cr>",    desc = "List Stashes" },
+      { "<leader>gt", "<cmd>Git stash<cr>",              desc = "Stash" },
+      { "<leader>h",  group = "Harpoon" },
+      { "<leader>ha", desc = "Add file harpoon list" },
+      { "<leader>hm", desc = "Open harpoon menu" },
+      { "<leader>n",  group = "Note" },
+      { "<leader>nn", desc = "New Note" },
+      { "<leader>o",  group = "Open" },
+      { "<leader>oo", desc = "Outline" },
+      { "<leader>ou", desc = "Undo Tree" },
+      { "<leader>on", desc = "Open NoNeckPain"},
+      { "<leader>p",  group = "Preview" },
+      { "<leader>pl", desc = "Start Latex Preview" },
+      { "<leader>s",  group = "Split" },
+      { "<leader>ss", desc = "Horizontal Split" },
+      { "<leader>sv", desc = "Vertical Split" },
+      { "<leader>tt", desc = "Open Terminal" },
+    }
 
-				g = {
-					name = "+Git",
-					g = { "<cmd>Git<cr>", "Git Status" },
-          h = { "<cmd>Git commit<cr>", "Git Commit" },
-          p = { "<cmd>Git push<cr>", "Git Push" },
-					b = { "<cmd>Telescope git_branches<cr>", "Checkout Branch" },
-					c = { "<cmd>Telescope git_commits<cr>", "Checkout Commit" },
-          s = { "<cmd>Telescope git_stash<cr>", "List Stashes" },
-          t = { "<cmd>Git stash<cr>", "Stash" },
-					f = { "<cmd>Flog<cr>", "Flog" },
-				},
-
-				d = {
-					name = "+Debug",
-					t = { "Toggle Breakpoint" },
-					o = { "Step Over" },
-					i = { "Step Into" },
-					s = { "Step Out" },
-					c = { "Continue" },
-				},
-				b = {
-					name = "+Bar",
-					m = { "Next Tab" },
-					n = { "Previous Tab" },
-					["1"] = { "Jump to Tab 1" },
-					["2"] = { "Jump to Tab 2" },
-					["3"] = { "Jump to Tab 3" },
-					["4"] = { "Jump to Tab 4" },
-				},
-
-				c = {
-					name = "+Code",
-					a = { "Code Action" },
-					r = { "Rename symbol" },
-					d = { "Root Directory" },
-				},
-
-				o = {
-					name = "+Open",
-					o = { "Outline" },
-					u = { "Undo Tree" },
-				},
-				s = {
-					name = "+Split",
-					v = { "Vertical Split" },
-					s = { "Horizontal Split" },
-				},
-				h = {
-					name = "+Harpoon",
-					a = { "Add file harpoon list" },
-					m = { "Open harpoon menu" },
-				},
-				p = {
-					name = "+Preview",
-					l = { "Start Latex Preview" },
-				},
-			},
-		}
-
-		wk.register(mappings, {})
-	end,
+    wk.add(mappings, {})
+  end,
 }

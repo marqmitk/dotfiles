@@ -1,4 +1,5 @@
 return {
+  {
   "nvim-neo-tree/neo-tree.nvim",
   config = function()
     local nonicons_extention = require("nvim-nonicons.extentions.nvim-tree")
@@ -29,5 +30,12 @@ return {
       },
     })
     vim.keymap.set("n", "<C-n>", "<cmd>Neotree float toggle<CR>", { silent = true })
-  end,
+  end
+},
+  {
+    "nvim-tree/nvim-tree.lua",
+    config = function()
+      require("nvim-tree").setup({})
+    end
+  }
 }
